@@ -25,13 +25,16 @@ var widget_uuid = 0,
 
 $.cleanData = (function( orig ) {
 	return function( elems ) {
+		var events;
 		for ( var i = 0, elem; (elem = elems[i]) != null; i++ ) {
 			try {
+
 				// Only trigger remove when necessary to save time
-				var events = $._data( elem, "events" );
-				if( events !== undefined && events.remove ){
+				events = $._data( elem, "events" );
+				if( events && events.remove ){
 					$( elem ).triggerHandler( "remove" );
 				}
+
 			// http://bugs.jquery.com/ticket/8235
 			} catch( e ) {}
 		}
